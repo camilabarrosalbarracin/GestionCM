@@ -29,7 +29,7 @@ User: root
 ```
 * Crear un Schema y añadirlo con el nombre *"basedatosclinica"* en la base de datos
 * Ejectutar el proyecto
-* Ejectutar el *script* para cargar la base de datos (el mismo se encuentra más abajo)
+* Ejectutar el *script* para cargar la base de datos ([script aqui](https://github.com/camilabarrosalbarracin/GestionCM?tab=readme-ov-file#script-para-base-de-datos))
 * Ingresar en el navegador a:  
 ```
 localhost:8080/inicio
