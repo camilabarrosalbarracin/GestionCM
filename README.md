@@ -102,7 +102,7 @@ localhost:8080/inicio
     * Spring data JPA (SQL)
     * Lombok (DEVELOPER TOOLS)
     * Configuración: Java 17 / Maven
-    * HTML : Bootstrap (herramientas de diseño web
+    * HTML : Bootstrap (herramientas de diseño web)
 
 ---
 
