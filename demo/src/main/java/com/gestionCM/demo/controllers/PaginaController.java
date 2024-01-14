@@ -2,6 +2,7 @@ package com.gestionCM.demo.controllers;
 import com.gestionCM.demo.models.Especialidad;
 import com.gestionCM.demo.models.Profesional;
 import com.gestionCM.demo.models.Turno;
+import com.gestionCM.demo.models.TurnoModificarDTO;
 import com.gestionCM.demo.repository.RepoEspecialidad;
 import com.gestionCM.demo.repository.RepoPaciente;
 import com.gestionCM.demo.repository.RepoProfesional;
@@ -12,9 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 public class PaginaController {
@@ -110,7 +110,9 @@ public class PaginaController {
     @GetMapping("/MostrarTurnosTodos")
     public String mostrarTurnosTodos(Model model) {
         List<Turno> turnos = repoTurno.findAll();
-        model.addAttribute("ListaDeTodosLosTurnos", turnos);
+        List<TurnoModificarDTO> turnosDTO = new ArrayList<>();
+        turnos.forEach(turno -> turnosDTO.add(new TurnoModificarDTO(turno,turnoService.puedeModificarOCancelarTurno(turno))));
+        model.addAttribute("ListaDeTodosLosTurnosDTO", turnosDTO);
         return "MostrarTurnosTodos";
     }
 

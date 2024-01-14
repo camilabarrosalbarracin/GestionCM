@@ -81,7 +81,7 @@ public class TurnoService {
         return repoTurno.existsByProfesionalAndFechayHoraTurno(nuevoTurno.getProfesional(), nuevoTurno.getFechayHoraTurno());
     }
 
-    private boolean puedeModificarOCancelarTurno(Turno turno) {
+    public boolean puedeModificarOCancelarTurno(Turno turno) {
         LocalDateTime horaLimite = turno.getFechayHoraTurno().minusHours(1); // Una hora antes del turno
         return LocalDateTime.now().isBefore(horaLimite);
     }

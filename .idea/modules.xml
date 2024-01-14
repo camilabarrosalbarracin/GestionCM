@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Gestion CM - Certant.iml" filepath="$PROJECT_DIR$/.idea/Gestion CM - Certant.iml" />
+      <module fileurl="file://$PROJECT_DIR$/imagenes_pantallas/imagenes_pantallas.iml" filepath="$PROJECT_DIR$/imagenes_pantallas/imagenes_pantallas.iml" />
     </modules>
   </component>
 </project>

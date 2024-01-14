@@ -11,53 +11,37 @@
     <title>Gestión de consultorio médico</title>
 </head>
 <script th:inline="javascript">
+
     document.addEventListener('DOMContentLoaded', function () {
-        var fechaTurnoInput = document.getElementById('fechaTurno');
         var fechaActual = new Date();
-        fechaActual.setDate(fechaActual.getDate() - 1); // Resta 1 día para asegurar que se incluya la fecha actual
+        fechaActual.setHours(0, 0, 0, 0);// Resta 1 día para asegurar que se incluya la fecha actual
 
         var fechaMaxima = new Date();
-        fechaMaxima.setMonth(fechaMaxima.getMonth() + 1); // Añade 1 mes
+        fechaActual.setHours(0, 0, 0, 0);
+        fechaMaxima.setMonth(fechaMaxima.getMonth() + 1);// Añade 1 mes
 
         // Establecer fecha mínima y máxima
-        fechaTurnoInput.setAttribute('min', formatDate(fechaActual));
-        fechaTurnoInput.setAttribute('max', formatDate(fechaMaxima));
+        flatpickr("#fechaTurno", {
+            minDate: fechaActual,
+            maxDate: fechaMaxima,
+            disable: disableSundays(),
+        });
 
         // Deshabilitar los domingos
-        disableSundays();
-
-        function formatDate(date) {
-            var year = date.getFullYear();
-            var month = ('0' + (date.getMonth() + 1)).slice(-2);
-            var day = ('0' + date.getDate()).slice(-2);
-            return year + '-' + month + '-' + day;
-        }
-
-        function mostrarCalendario() {
-            flatpickr(fechaTurnoInput, {
-                enable: [
-                    function (date) {
-                        // Permitir solo fechas dentro del próximo mes, de lunes a sábado
-                        return date >= new Date() && date.getMonth() === (new Date().getMonth() + 1) && date.getDay() !== 0; // Domingo es el día 0
-                    }
-                ],
-                dateFormat: 'Y-m-d',
-                minDate: 'today',
-                maxDate: new Date().fp_incr(30) // Añadir 30 días a partir de hoy
-            });
-        }
-
         function disableSundays() {
-            var fechaMaximaDate = new Date(fechaMaxima);
-            var fechaMinimaDate = new Date(fechaActual);
+            var listaFechas = [];
+            var fechaAux = new Date();
+            fechaActual.setHours(0, 0, 0, 0);
+            while (fechaAux <= fechaMaxima) {
+                // Añadimos la fecha actual al array
+                listaFechas.push(new Date(fechaAux));
 
-            while (fechaMinimaDate <= fechaMaximaDate) {
-                if (fechaMinimaDate.getDay() === 0) { // 0 corresponde a domingo
-                    var formattedDate = formatDate(fechaMinimaDate);
-                    document.querySelector('input[type="date"][id="fechaTurno"] option[value="' + formattedDate + '"]').disabled = true;
-                }
-                fechaMinimaDate.setDate(fechaMinimaDate.getDate() + 1);
+                // Incrementamos la fecha mínima para la siguiente iteración
+                fechaAux.setDate(fechaAux.getDate()+1);
             }
+            var sunday = listaFechas.filter(fecha => fecha.getUTCDay() === 1);
+            console.log(sunday);
+            return  sunday;
         }
     });
 

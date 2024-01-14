@@ -50,7 +50,6 @@ public class ProfesionalController {
     @GetMapping("/obtenerEspecialidadesPorProfesional")
     public Set<Especialidad> obtenerEspecialidadesPorProfesional(@RequestParam Long idProfesional) {
         Profesional profesional = repoProfesional.findById(idProfesional).orElse(null);
-        System.out.println(profesional);
         if (profesional != null) {
             return profesional.getEspecialidades();
         } else {
