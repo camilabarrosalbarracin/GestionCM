@@ -39,7 +39,7 @@
                 // Incrementamos la fecha mínima para la siguiente iteración
                 fechaAux.setDate(fechaAux.getDate()+1);
             }
-            var sunday = listaFechas.filter(fecha => fecha.getUTCDay() === 1);
+            var sunday = listaFechas.filter(fecha => fecha.getUTCDay() === 0);
             console.log(sunday);
             return  sunday;
         }
